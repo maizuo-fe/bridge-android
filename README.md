@@ -1,5 +1,5 @@
-# AppBridge
-> support callback function for bridge between javascript and java
+# AndroidBridge
+> support callback function for bridge between javascript and Android
 
 ## Usage
 setup Java:
@@ -7,42 +7,42 @@ setup Java:
 public void passDataToApp(String type, String dataJson, String handlerName) {
     String result = "result here";
     // ...
-    webView.loadUrl("javascript:AppBridge.callHandler('" + handlerName + "', '" + result + "');"); 
+    webView.loadUrl("javascript:AndroidBridge.callHandler('" + handlerName + "', '" + result + "');"); 
 }
 ```
 
 setup Javascript:
 ```Javascript
 (function () {
-    var AppBridge = window.AppBridge;
-    AppBridge.setInvoker(appBindJs, 'passDataToJava');
+    var AndroidBridge = window.AndroidBridge;
+    AndroidBridge.setInvoker(appBindJs, 'passDataToJava');
 })();
 ```
 
 then invoke from Javascript:
 ```Javascript
 (function () {
-    var AppBridge = window.AppBridge;
+    var AndroidBridge = window.AndroidBridge;
     var type = '1';
     var data = {foo: 'bar'};
-    AppBridge.invoke(type, data, function (response) {
+    AndroidBridge.invoke(type, data, function (response) {
         console.log(response);
     });
 })();
 ```
 
 ## Api
-### AppBridge.setInvoker
+### AndroidBridge.setInvoker
 + **param**
     - **object** context
     - **string** invoker
 
 **example**
 ```Javascript
-AppBridge.setInvoker(appBindJs, 'passDataToJava');
+AndroidBridge.setInvoker(appBindJs, 'passDataToJava');
 ```
 
-### AppBridge.invoke
+### AndroidBridge.invoke
 + **param**
     - any arguments
     - ...
@@ -50,12 +50,12 @@ AppBridge.setInvoker(appBindJs, 'passDataToJava');
 
 **example**
 ```Javascript
-AppBridge.invoke(1, {foo: 'bar'}, function (response) {
+AndroidBridge.invoke(1, {foo: 'bar'}, function (response) {
     console.log(response);
 });
 ```
 
-### AppBridge.callHandler
+### AndroidBridge.callHandler
 + **param**
     - **string** handlerName
     - any arguments
@@ -63,23 +63,23 @@ AppBridge.invoke(1, {foo: 'bar'}, function (response) {
 
 **exmaple**
 ```Javascript
-AppBridge.callHandler('1399358347906v1EoKltD', 'response here');
+AndroidBridge.callHandler('1399358347906v1EoKltD', 'response here');
 ```
 in java:
 ```JAVA
 String result = "response here";
-webView.loadUrl("javascript:AppBridge.callHandler('" + handlerName + "', '" + result + "');"); 
+webView.loadUrl("javascript:AndroidBridge.callHandler('" + handlerName + "', '" + result + "');"); 
 ```
 
 handlers can receive arguments with any length.
 e.g.:
 ```JAVA
-webView.loadUrl("javascript:AppBridge.callHandler('" + handlerName + "', 'foo', 'bar', 'baz');"); 
+webView.loadUrl("javascript:AndroidBridge.callHandler('" + handlerName + "', 'foo', 'bar', 'baz');"); 
 ```
     
-### AppBridge.releaseInvoker
+### AndroidBridge.releaseInvoker
 just for unit test
 **exmaple**
 ```Javascript
-AppBridge.releaseInvoker();
+AndroidBridge.releaseInvoker();
 ```

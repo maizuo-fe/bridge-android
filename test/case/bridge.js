@@ -1,4 +1,4 @@
-describe('AppBridge', function () {
+describe('AndroidBridge', function () {
   describe('simplify', function () {
     before(function () {
       var Zombie = {};
@@ -6,16 +6,16 @@ describe('AppBridge', function () {
         var a = [foo, {foobar: bar}, [baz]];
         var b = foo + bar + baz;
         setTimeout(function () {
-          AppBridge.callHandler(handlerName, a, b);
+          AndroidBridge.callHandler(handlerName, a, b);
         }, 0);
       };
-      AppBridge.setInvoker(Zombie, 'invoker');
+      AndroidBridge.setInvoker(Zombie, 'invoker');
     });
     after(function () {
-      AppBridge.releaseInvoker();
+      AndroidBridge.releaseInvoker();
     });
     it('should work', function (done) {
-      AppBridge.invoke('123', 'abc', 'efg', function (a, b) {
+      AndroidBridge.invoke('123', 'abc', 'efg', function (a, b) {
         expect(a).to.be.deep.equal(['123', {foobar: 'abc'}, ['efg']]);
         expect(b).to.be.deep.equal('123abcefg');
         done();
@@ -28,17 +28,17 @@ describe('AppBridge', function () {
       Zombie.invoker = function (foo, bar, baz, handlerName) {
         var a = [foo, {foobar: bar}, [baz]];
         var b = foo + bar + baz;
-        AppBridge.callHandler(handlerName, a, b);
+        AndroidBridge.callHandler(handlerName, a, b);
       };
-      AppBridge.setInvoker(Zombie, 'invoker');
+      AndroidBridge.setInvoker(Zombie, 'invoker');
     });
     after(function () {
-      AppBridge.releaseInvoker();
+      AndroidBridge.releaseInvoker();
     });
     it('scope should work', function () {
       (function () {
         var tmp = '456';
-        AppBridge.invoke('123', 'abc', 'efg', function (a, b) {
+        AndroidBridge.invoke('123', 'abc', 'efg', function (a, b) {
           expect(tmp).to.be.equal('456');
         });
       })();
@@ -51,7 +51,7 @@ describe('AppBridge', function () {
         };
         Person.prototype.invoke = function () {
           var name = this.name;
-          AppBridge.invoke('123', 'abc', 'efg', function (a, b) {
+          AndroidBridge.invoke('123', 'abc', 'efg', function (a, b) {
             expect(name).to.be.equal('yelo');
           });
         };
