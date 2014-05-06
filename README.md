@@ -33,19 +33,21 @@ then invoke from Javascript:
 
 ## Api
 ### AppBridge.setInvoker
-**param**
++ **param**
     - **object** context
     - **string** invoker
+
 **example**
 ```Javascript
 AppBridge.setInvoker(appBindJs, 'passDataToJava');
 ```
 
 ### AppBridge.invoke
-**param**
++ **param**
     - any arguments
     - ...
     - **function** callback
+
 **example**
 ```Javascript
 AppBridge.invoke(1, {foo: 'bar'}, function (response) {
@@ -54,10 +56,11 @@ AppBridge.invoke(1, {foo: 'bar'}, function (response) {
 ```
 
 ### AppBridge.callHandler
-**param**
++ **param**
     - **string** handlerName
     - any arguments
     - ...
+
 **exmaple**
 ```Javascript
 AppBridge.callHandler('1399358347906v1EoKltD', 'response here');
