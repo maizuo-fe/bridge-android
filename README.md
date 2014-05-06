@@ -70,6 +70,12 @@ in java:
 String result = "response here";
 webView.loadUrl("javascript:AppBridge.callHandler('" + handlerName + "', '" + result + "');"); 
 ```
+
+handlers can receive arguments with any length.
+e.g.:
+```JAVA
+webView.loadUrl("javascript:AppBridge.callHandler('" + handlerName + "', 'foo', 'bar', 'baz');"); 
+```
     
 ### AppBridge.releaseInvoker
 just for unit test
