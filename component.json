@@ -1,0 +1,18 @@
+{
+  "name": "bridge-android",
+  "repo": "maizuo-fe/bridge-android",
+  "description": "the bridge connect android and javascript",
+  "version": "0.1.0",
+  "keywords": [
+    "bridge",
+    "android",
+    "app"
+  ],
+  "scripts": [
+    "src/bridge.js"
+  ],
+  "main": "src/bridge.js",
+  "dependencies": {
+  },
+  "license": "MIT"
+}
