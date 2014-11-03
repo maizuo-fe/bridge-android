@@ -4,11 +4,8 @@
   "private": true,
   "devDependencies": {
     "chai": "^1.9.1",
-    "duo": "^0.8.8",
     "gulp": "^3.8.9",
-    "gulp-util": "^3.0.1",
-    "lodash": "^2.4.1",
-    "sinon": "^1.10.3",
-    "through2": "^0.6.3"
+    "gulp-duojs": "^0.3.0",
+    "sinon": "^1.10.3"
   }
 }
