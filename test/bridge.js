@@ -1,21 +1,29 @@
+var expect = require('chai').expect;
+
+require('mocha-jsdom')();
+
 describe('AndroidBridge', function () {
+  before(function () {
+    this.bridge = require('..');
+  });
   describe('simplify', function () {
     before(function () {
+      var self = this;
       var Zombie = {};
       Zombie.invoker = function (foo, bar, baz, handlerName) {
         var a = [foo, {foobar: bar}, [baz]];
         var b = foo + bar + baz;
         setTimeout(function () {
-          AndroidBridge.callHandler(handlerName, a, b);
+          self.bridge.callHandler(handlerName, a, b);
         }, 0);
       };
-      AndroidBridge.setInvoker(Zombie, 'invoker');
+      this.bridge.setInvoker(Zombie, 'invoker');
     });
     after(function () {
-      AndroidBridge.releaseInvoker();
+      this.bridge.releaseInvoker();
     });
     it('should work', function (done) {
-      AndroidBridge.invoke('123', 'abc', 'efg', function (a, b) {
+      this.bridge.invoke('123', 'abc', 'efg', function (a, b) {
         expect(a).to.be.deep.equal(['123', {foobar: 'abc'}, ['efg']]);
         expect(b).to.be.deep.equal('123abcefg');
         done();
@@ -24,26 +32,29 @@ describe('AndroidBridge', function () {
   });
   describe('scope', function () {
     before(function () {
+      var self = this;
       var Zombie = {};
       Zombie.invoker = function (foo, bar, baz, handlerName) {
         var a = [foo, {foobar: bar}, [baz]];
         var b = foo + bar + baz;
-        AndroidBridge.callHandler(handlerName, a, b);
+        self.bridge.callHandler(handlerName, a, b);
       };
-      AndroidBridge.setInvoker(Zombie, 'invoker');
+      this.bridge.setInvoker(Zombie, 'invoker');
     });
     after(function () {
-      AndroidBridge.releaseInvoker();
+      this.bridge.releaseInvoker();
     });
     it('scope should work', function () {
+      var self = this;
       (function () {
         var tmp = '456';
-        AndroidBridge.invoke('123', 'abc', 'efg', function (a, b) {
+        self.bridge.invoke('123', 'abc', 'efg', function (a, b) {
           expect(tmp).to.be.equal('456');
         });
       })();
     });
     it('context should work', function () {
+      var self = this;
       (function () {
         var Person = function () {
           this.name = 'yelo';
@@ -51,7 +62,7 @@ describe('AndroidBridge', function () {
         };
         Person.prototype.invoke = function () {
           var name = this.name;
-          AndroidBridge.invoke('123', 'abc', 'efg', function (a, b) {
+          self.bridge.invoke('123', 'abc', 'efg', function (a, b) {
             expect(name).to.be.equal('yelo');
           });
         };

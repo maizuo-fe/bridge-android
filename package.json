@@ -2,9 +2,13 @@
   "name": "bridge-android",
   "version": "0.1.1",
   "devDependencies": {
-    "chai": "^1.9.1",
+    "chai": "^3.5.0",
     "gulp": "^3.8.9",
     "gulp-duojs": "^0.3.0",
+    "gulp-mocha": "^2.2.0",
+    "jsdom": "^8.0.2",
+    "mocha": "^2.4.5",
+    "mocha-jsdom": "^1.0.0",
     "sinon": "^1.10.3"
   },
   "author": "yelo <zhihuzeye@gmail.com>",
