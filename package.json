@@ -11,6 +11,9 @@
     "mocha-jsdom": "^1.0.0",
     "sinon": "^1.10.3"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "author": "yelo <zhihuzeye@gmail.com>",
   "main": "./lib/bridge.js"
 }
